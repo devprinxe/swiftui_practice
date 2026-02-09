@@ -21,11 +21,15 @@ final class PostListViewModel {
     
     // MARK: - Data Fetching
     
-    func loadData() async {
+    func loadData(isRefreshing: Bool = false) async {
         isLoading = true
         errorMessage = nil
         
         do {
+            if(isRefreshing){
+                //Wait 4 seconds
+                _ = try? await Task.sleep(nanoseconds: 4_000_000_000)
+            }
             async let postsTask = apiService.fetchPosts()
             async let usersTask = apiService.fetchUsers()
             

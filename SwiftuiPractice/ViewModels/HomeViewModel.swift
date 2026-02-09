@@ -18,7 +18,16 @@ final class HomeViewModel {
     var isLoading: Bool = false
     var errorMessage: String?
     
-    private let apiService = APIService.shared
+//    private let postService = PostService.shared
+//    private let userService = UserService.shared
+    
+    private let postService: PostServiceProtocol
+    private let userService: UserServiceProtocol
+    
+    init(postService: PostServiceProtocol = PostService.shared, userService: UserServiceProtocol = UserService.shared) {
+        self.postService = postService
+        self.userService = userService
+    }
     
     // MARK: - Data Fetching
     
@@ -27,9 +36,9 @@ final class HomeViewModel {
         errorMessage = nil
         
         do {
-            async let postsTask = apiService.fetchPosts()
-            async let usersTask = apiService.fetchUsers()
-            async let currentUserTask = apiService.fetchUser(id: userId)
+            async let postsTask = postService.fetchPosts()
+            async let usersTask = userService.fetchUser()
+            async let currentUserTask = userService.getUser(id: userId)
             
             let (fetchedPosts, fetchedUsers, fetchedCurrentUser) = try await (postsTask, usersTask, currentUserTask)
             

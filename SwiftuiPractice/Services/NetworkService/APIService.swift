@@ -37,11 +37,10 @@ final class APIService {
             headers: headers,
             queryParameters: queryParameters
         )
-        
         let (data, response) = try await session.data(for: request)
         
         try validateResponse(response)
-        
+        logResponse(data, response,request)
         return try decode(data)
     }
     
@@ -62,7 +61,7 @@ final class APIService {
         )
         
         let (_, response) = try await session.data(for: request)
-        
+
         try validateResponse(response)
     }
     
@@ -174,5 +173,26 @@ final class APIService {
     /// Fetch a single user by ID
     func fetchUser(id: Int) async throws -> User {
         return try await request(endpoint: "\(ApiConstants.usersEndpoint)/\(id)")
+    }
+    
+    private func logRequest(_ request: URLRequest) {
+        print("\n--- 🚀 OUTGOING REQUEST ---")
+        print("URL: \(request.url?.absoluteString ?? "")")
+        print("Method: \(request.httpMethod ?? "")")
+        if let headers = request.allHTTPHeaderFields {
+            print("Headers: \(headers)")
+        }
+        print("---------------------------\n")
+    }
+
+    private func logResponse(_ data: Data, _ response: URLResponse,_ request: URLRequest) {
+        logRequest(request)
+        let httpResponse = response as? HTTPURLResponse
+        print("\n--- ✅ INCOMING RESPONSE ---")
+        print("Status Code: \(httpResponse?.statusCode ?? 0)")
+        if let json = String(data: data, encoding: .utf8) {
+            print("Body: \(json)")
+        }
+        print("---------------------------\n")
     }
 }
