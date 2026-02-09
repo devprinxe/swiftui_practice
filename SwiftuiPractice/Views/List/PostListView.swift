@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostListView: View {
     @EnvironmentObject var router: AppRouter
-    @StateObject private var viewModel = PostListViewModel()
+    @State private var viewModel = PostListViewModel()
     
     var body: some View {
         NavigationStack(path: $router.listPath) {

@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import Combine
 
 @MainActor
-final class PostDetailViewModel: ObservableObject {
-    @Published var post: Post?
-    @Published var author: User?
+@Observable
+final class PostDetailViewModel {
+    var post: Post?
+    var author: User?
     
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
+    var isLoading: Bool = false
+    var errorMessage: String?
     
     private let apiService = APIService.shared
     

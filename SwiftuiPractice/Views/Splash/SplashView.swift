@@ -33,18 +33,14 @@ struct SplashView: View {
                     .opacity(opacity)
             }
         }
-        .onAppear {
+        .task {
             withAnimation(.easeInOut(duration: 1.0)) {
                 scale = 1.0
                 opacity = 1.0
             }
-            
-            // Auto-dismiss after 2 seconds
-            Task {
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
-                withAnimation {
-                    router.dismissSplash()
-                }
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            withAnimation {
+                router.dismissSplash()
             }
         }
     }

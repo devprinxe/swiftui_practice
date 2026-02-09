@@ -10,7 +10,7 @@ import SwiftUI
 struct PostDetailView: View {
     let postId: Int
     
-    @StateObject private var viewModel = PostDetailViewModel()
+    @State private var viewModel = PostDetailViewModel()
     
     var body: some View {
         ScrollView {

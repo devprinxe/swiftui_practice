@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
     @EnvironmentObject var router: AppRouter
-    @StateObject private var viewModel = AccountViewModel()
+    @State private var viewModel = AccountViewModel()
     
     var body: some View {
         NavigationStack(path: $router.accountPath) {

@@ -6,15 +6,17 @@
 //
 
 import SwiftUI
+import Combine
 
 @MainActor
-final class HomeViewModel: ObservableObject {
-    @Published var posts: [Post] = []
-    @Published var users: [User] = []
-    @Published var currentUser: User?
+@Observable
+final class HomeViewModel {
+    var posts: [Post] = []
+    var users: [User] = []
+    var currentUser: User?
     
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
+    var isLoading: Bool = false
+    var errorMessage: String?
     
     private let apiService = APIService.shared
     

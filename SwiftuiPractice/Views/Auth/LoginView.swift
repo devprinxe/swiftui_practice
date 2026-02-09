@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var router: AppRouter
-    @StateObject private var viewModel = AuthViewModel()
+    @State private var viewModel = AuthViewModel()
     
     var body: some View {
         ScrollView {

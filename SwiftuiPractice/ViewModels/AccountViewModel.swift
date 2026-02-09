@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import Combine
 
 @MainActor
-final class AccountViewModel: ObservableObject {
-    @Published var user: User?
+@Observable
+final class AccountViewModel {
+    var user: User?
     
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
+    var isLoading: Bool = false
+    var errorMessage: String?
     
     private let apiService = APIService.shared
     

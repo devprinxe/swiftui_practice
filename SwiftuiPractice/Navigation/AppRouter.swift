@@ -11,7 +11,7 @@ import Combine
 @MainActor
 final class AppRouter: ObservableObject {
     // MARK: - Auth State
-    @Published var isAuthenticated: Bool = false
+    @AppStorage("is_logged_in") var isAuthenticated: Bool = false
     @Published var showSplash: Bool = true
     
     // MARK: - Tab State

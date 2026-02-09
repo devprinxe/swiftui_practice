@@ -6,16 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 @MainActor
-final class AuthViewModel: ObservableObject {
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var fullName: String = ""
-    @Published var confirmPassword: String = ""
+@Observable
+final class AuthViewModel {
+    var email: String = ""
+    var password: String = ""
+    var fullName: String = ""
+    var confirmPassword: String = ""
     
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
+    var isLoading: Bool = false
+    var errorMessage: String?
     
     // MARK: - Validation
     
